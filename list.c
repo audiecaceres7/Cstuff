@@ -12,10 +12,10 @@ int insert(int *array[], int index, int item, int *length);
 int remove_element(int *array[], int index, int *length);
 
 // Read and Modify an element at a position
-int read(int *array[], int index);
+int modify(int *array[], int index, int value);
 
 // Search list for and element
-int search(int *array[], int index);
+int search(int *array[], int value, int *length);
 
 // print array
 int print_array(int *array[], int *length);
@@ -52,9 +52,15 @@ int main(void)
     return 1;
   }
 
-      
   print_array(&array, &length);
   check_array(&length);
+
+  modify(&array, 3, 9);
+
+  print_array(&array, &length);
+  check_array(&length);
+
+  search(&array, 31, &length);
 
   return 0;
 }
@@ -139,3 +145,25 @@ int remove_element(int *array[], int index, int *length)
   return 0;
 }
 
+int modify(int *array[], int index, int value)
+{
+  int old_value = (*array)[index];
+  (*array)[index] = value;
+
+  printf("Value from ( index %i ) value %i was modified to %i\n", index, old_value, value);
+  return 0;
+}
+
+int search(int *array[], int item, int *length)
+{
+  for (int i = 0; i < (*length); i++)
+  {
+    if ((*array)[i] == item)
+    {
+      printf("Value %i found. \n", item);
+      return 0;
+    } 
+  }
+  printf("Value not found. \n");
+  return 0;
+}
